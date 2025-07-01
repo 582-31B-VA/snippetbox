@@ -1,26 +1,33 @@
 from flask import Flask
 
-from snippetbox import snippets
+from snippetbox import snippets, cli
+from snippetbox.utils import db
 
-# The most straightforward way to create a Flask application is to
-# create a global "Flask" instance directly at the top of your code,
-# like we did previously. While this is simple, it can make cause some
-# tricky issues as the project grows.
-#
-# Instead of creating a Flask instance globally, we create it inside a
-# function known as the "application factory". Any setup the application
-# needs will happen inside the function, then the application will be
-# returned.
+from config import Config
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, instance_relative_config=True)
+
+    # Applications need some kind of configuration. There are different
+    # settings you might want to change depending on the application
+    # environment like toggling the debug mode, setting the secret key,
+    # and other such environment-specific things.
+    #
+    # The "config" attribute of the Flask object is where we store these
+    # configuration values. The "from_object" method allows to set these
+    # values these values from a given object.
+    app.config.from_object(Config)
+
+    # Like routes, commands need to be registered with our app.
+    app.cli.add_command(cli.init)
+
     app.register_blueprint(snippets.blueprint)
-
-    # The "add_url_rule" function maps the "/" URL to the "index" view
-    # function in the "snippets.routes" module. This is necessary because
-    # we want to keep the snippets logic in the "snippets" package.
-
     app.add_url_rule("/", endpoint="home", view_func=snippets.routes.index)
+
+    # This tells Flask to call the "close_connection" function when
+    # cleaning up after returning the response. That way, we don't have
+    # to do it manually.
+    app.teardown_appcontext(db.close_connection)
 
     return app

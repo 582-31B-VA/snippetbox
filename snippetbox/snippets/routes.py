@@ -1,15 +1,23 @@
-from flask import render_template
+from flask import redirect, render_template, url_for
 
 from snippetbox.snippets import blueprint
-
-# This is where we will define view functions for the "snippets"
-# blueprint.
-#
-# Because of the blueprint's URL prefix, the URL for all these routes
-# will start with "/snippets". For instance, the URL for this route is
-# actually "/snippets/".
+from snippetbox.snippets.models import SnippetModel
+from snippetbox.utils import db
 
 
 @blueprint.get("/")
 def index():
-    return render_template("/snippets/index.jinja")
+    # We are now fetching the latest snippets from the database.
+    snippets = SnippetModel(db.get_connection())
+    return render_template("/snippets/index.jinja", snippets=snippets.latest())
+
+
+# This creates some dummy data and inserts a snippet in our database.
+@blueprint.post("/create")
+def create():
+    title = "O snail"
+    content = "O snail\nClimb Mount Fuji,\nBut slowly, slowly!"
+    valid_days = 7
+    snippets = SnippetModel(db.get_connection())
+    snippets.insert(title, content, valid_days)
+    return redirect(url_for("home"))
