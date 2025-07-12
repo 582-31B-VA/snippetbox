@@ -1,0 +1,63 @@
+{% extends "base.jinja" %}
+{% block title %}Create a New Snippet{% endblock %}
+{% block main %}
+    <form action="{{ url_for('snippets.create') }}" method="POST">
+        <label>
+            Title:
+            {% if form.errors.get("title") %}
+                <p class="error">{{ form.errors["title"] }}</p>
+            {% endif %}
+            <input type="text" name="title" value="{{ form.title }}" required>
+        </label>
+        <label>
+            Content:
+            {% if form.errors.get("content") %}
+                <p class="error">{{ form.errors["content"] }}</p>
+            {% endif %}
+            <textarea name="content" required>{{ form.content }}</textarea>
+        </label>
+        <fieldset>
+            <legend>Delete in:</legend>
+            {% if form.errors.get("valid_days") %}
+                <p class="error">{{ form.errors["valid_days"] }}</p>
+            {% endif %}
+            <label>
+                <input
+                    type="radio"
+                    name="valid_days"
+                    value="365"
+                    {% if form.valid_days == 365 %}
+                        checked
+                    {% endif %}
+                    required
+                >
+                One Year
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="valid_days"
+                    value="7"
+                    {% if form.valid_days == 7 %}
+                        checked
+                    {% endif %}
+                    required
+                >
+                One Week
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="valid_days"
+                    value="1"
+                    {% if form.valid_days == 1 %}
+                        checked
+                    {% endif %}
+                    required
+                >
+                One Day
+            </label>
+        </fieldset>
+        <button>Submit</button>
+    </form>
+{% endblock %}

@@ -12,8 +12,8 @@ html, body {
 
 body {
     line-height: 1.5;
-    background-color: #F1F3F6;
-    color: #34495E;
+    background-color: #f1f3f6;
+    color: #34495e;
     overflow-y: scroll;
 }
 
@@ -41,7 +41,7 @@ h1 a {
 
 h1 a:hover {
     text-decoration: none;
-    color: #34495E;
+    color: #34495e;
 }
 
 h2 {
@@ -52,12 +52,12 @@ h2 {
 }
 
 a {
-    color: #62CB31;
+    color: #62cb31;
     text-decoration: none;
 }
 
 a:hover {
-    color: #4EB722;
+    color: #4eb722;
     text-decoration: underline;
 }
 
@@ -67,13 +67,85 @@ textarea, input:not([type="submit"]) {
 }
 
 header {
-    background-image: -webkit-linear-gradient(left, #34495e, #34495e 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
-    background-image: -moz-linear-gradient(left, #34495e, #34495e 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
-    background-image: -ms-linear-gradient(left, #34495e, #34495e 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
-    background-image: linear-gradient(to right, #34495e, #34495e 25%, #9b59b6 25%, #9b59b6 35%, #3498db 35%, #3498db 45%, #62cb31 45%, #62cb31 55%, #ffb606 55%, #ffb606 65%, #e67e22 65%, #e67e22 75%, #e74c3c 85%, #e74c3c 85%, #c0392b 85%, #c0392b 100%);
+    background-image: -webkit-linear-gradient(
+        left,
+        #34495e,
+        #34495e 25%,
+        #9b59b6 25%,
+        #9b59b6 35%,
+        #3498db 35%,
+        #3498db 45%,
+        #62cb31 45%,
+        #62cb31 55%,
+        #ffb606 55%,
+        #ffb606 65%,
+        #e67e22 65%,
+        #e67e22 75%,
+        #e74c3c 85%,
+        #e74c3c 85%,
+        #c0392b 85%,
+        #c0392b 100%
+    );
+    background-image: -moz-linear-gradient(
+        left,
+        #34495e,
+        #34495e 25%,
+        #9b59b6 25%,
+        #9b59b6 35%,
+        #3498db 35%,
+        #3498db 45%,
+        #62cb31 45%,
+        #62cb31 55%,
+        #ffb606 55%,
+        #ffb606 65%,
+        #e67e22 65%,
+        #e67e22 75%,
+        #e74c3c 85%,
+        #e74c3c 85%,
+        #c0392b 85%,
+        #c0392b 100%
+    );
+    background-image: -ms-linear-gradient(
+        left,
+        #34495e,
+        #34495e 25%,
+        #9b59b6 25%,
+        #9b59b6 35%,
+        #3498db 35%,
+        #3498db 45%,
+        #62cb31 45%,
+        #62cb31 55%,
+        #ffb606 55%,
+        #ffb606 65%,
+        #e67e22 65%,
+        #e67e22 75%,
+        #e74c3c 85%,
+        #e74c3c 85%,
+        #c0392b 85%,
+        #c0392b 100%
+    );
+    background-image: linear-gradient(
+        to right,
+        #34495e,
+        #34495e 25%,
+        #9b59b6 25%,
+        #9b59b6 35%,
+        #3498db 35%,
+        #3498db 45%,
+        #62cb31 45%,
+        #62cb31 55%,
+        #ffb606 55%,
+        #ffb606 65%,
+        #e67e22 65%,
+        #e67e22 75%,
+        #e74c3c 85%,
+        #e74c3c 85%,
+        #c0392b 85%,
+        #c0392b 100%
+    );
     background-size: 100% 6px;
     background-repeat: no-repeat;
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
     overflow: auto;
     padding-top: 33px;
     padding-bottom: 27px;
@@ -81,17 +153,17 @@ header {
 }
 
 header a {
-    color: #34495E;
+    color: #34495e;
     text-decoration: none;
 }
 
 nav {
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
     padding-top: 17px;
     padding-bottom: 15px;
-    background: #F7F9FA;
+    background: #f7f9fa;
     height: 60px;
-    color: #6A6C6F;
+    color: #6a6c6f;
 }
 
 nav a {
@@ -119,7 +191,7 @@ nav div:last-child a {
 }
 
 nav a.live {
-    color: #34495E;
+    color: #34495e;
     cursor: default;
 }
 
@@ -128,24 +200,24 @@ nav a.live:hover {
 }
 
 nav a.live:after {
-    content: '';
+    content: "";
     display: block;
     position: relative;
     left: calc(50% - 7px);
     top: 9px;
     width: 14px;
     height: 14px;
-    background: #F7F9FA;
-    border-left: 1px solid #E4E5E7;
-    border-bottom: 1px solid #E4E5E7;
+    background: #f7f9fa;
+    border-left: 1px solid #e4e5e7;
+    border-bottom: 1px solid #e4e5e7;
     -moz-transform: rotate(45deg);
     -webkit-transform: rotate(-45deg);
 }
 
-a.button, input[type="submit"] {
-    background-color: #62CB31;
+a.button, button {
+    background-color: #62cb31;
     border-radius: 3px;
-    color: #FFFFFF;
+    color: #ffffff;
     padding: 18px 27px;
     border: none;
     display: inline-block;
@@ -153,23 +225,36 @@ a.button, input[type="submit"] {
     font-weight: 700;
 }
 
-a.button:hover, input[type="submit"]:hover {
-    background-color: #4EB722;
-    color: #FFFFFF;
+a.button:hover, button:hover {
+    background-color: #4eb722;
+    color: #ffffff;
     cursor: pointer;
     text-decoration: none;
 }
 
-form div {
-    margin-bottom: 18px;
+label {
+    display: block;
+    margin-bottom: 1rem;
 }
 
-form div:last-child {
-    border-top: 1px dashed #E4E5E7;
+fieldset {
+    border: 0;
 }
 
-form input[type="radio"] {
-    margin-left: 18px;
+label input:not([type="radio"]), label textarea {
+    margin-top: 0.5rem;
+}
+
+legend {
+    margin-bottom: 0.5rem;
+}
+
+fieldset label {
+    display: inline;
+}
+
+form button {
+    margin-top: 2rem;
 }
 
 form input[type="text"], form input[type="password"], form input[type="email"] {
@@ -177,26 +262,24 @@ form input[type="text"], form input[type="password"], form input[type="email"] {
     width: 100%;
 }
 
-form input[type=text], form input[type="password"], form input[type="email"], textarea {
-    color: #6A6C6F;
-    background: #FFFFFF;
-    border: 1px solid #E4E5E7;
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+textarea {
+    color: #6a6c6f;
+    background: #ffffff;
+    border: 1px solid #e4e5e7;
     border-radius: 3px;
 }
 
-form label {
-    display: inline-block;
-    margin-bottom: 9px;
-}
-
 .error {
-    color: #C0392B;
+    color: #c0392b;
     font-weight: bold;
     display: block;
 }
 
 .error + textarea, .error + input {
-    border-color: #C0392B !important;
+    border-color: #c0392b !important;
     border-width: 2px !important;
 }
 
@@ -206,35 +289,21 @@ textarea {
     height: 266px;
 }
 
-button {
-    background: none;
-    padding: 0;
-    border: none;
-    color: #62CB31;
-    text-decoration: none;
-}
-
-button:hover {
-    color: #4EB722;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 .snippet {
-    background-color: #FFFFFF;
-    border: 1px solid #E4E5E7;
+    background-color: #ffffff;
+    border: 1px solid #e4e5e7;
     border-radius: 3px;
 }
 
 .snippet pre {
     padding: 18px;
-    border-top: 1px solid #E4E5E7;
-    border-bottom: 1px solid #E4E5E7;
+    border-top: 1px solid #e4e5e7;
+    border-bottom: 1px solid #e4e5e7;
 }
 
 .snippet .metadata {
-    background-color: #F7F9FA;
-    color: #6A6C6F;
+    background-color: #f7f9fa;
+    color: #6a6c6f;
     padding: 0.75em 18px;
     overflow: auto;
 }
@@ -244,7 +313,7 @@ button:hover {
 }
 
 .snippet .metadata strong {
-    color: #34495E;
+    color: #34495e;
 }
 
 .snippet .metadata time {
@@ -260,17 +329,17 @@ button:hover {
 }
 
 div.flash {
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: bold;
-    background-color: #34495E;
+    background-color: #34495e;
     padding: 18px;
     margin-bottom: 36px;
     text-align: center;
 }
 
 div.error {
-    color: #FFFFFF;
-    background-color: #C0392B;
+    color: #ffffff;
+    background-color: #c0392b;
     padding: 18px;
     margin-bottom: 36px;
     font-weight: bold;
@@ -279,7 +348,7 @@ div.error {
 
 table {
     background: white;
-    border: 1px solid #E4E5E7;
+    border: 1px solid #e4e5e7;
     border-collapse: collapse;
     width: 100%;
 }
@@ -291,23 +360,23 @@ td, th {
 
 th:last-child, td:last-child {
     text-align: right;
-    color: #6A6C6F;
+    color: #6a6c6f;
 }
 
 tr {
-    border-bottom: 1px solid #E4E5E7;
+    border-bottom: 1px solid #e4e5e7;
 }
 
 tr:nth-child(2n) {
-    background-color: #F7F9FA;
+    background-color: #f7f9fa;
 }
 
 footer {
-    border-top: 1px solid #E4E5E7;
+    border-top: 1px solid #e4e5e7;
     padding-top: 17px;
     padding-bottom: 15px;
-    background: #F7F9FA;
+    background: #f7f9fa;
     height: 60px;
-    color: #6A6C6F;
+    color: #6a6c6f;
     text-align: center;
 }
