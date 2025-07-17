@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request, flash
+from flask import redirect, render_template, url_for, request, flash, session
 
 from snippetbox.snippets import blueprint, forms
 from snippetbox.snippets.models import SnippetModel
@@ -8,18 +8,33 @@ from snippetbox.utils.forms import Field
 
 @blueprint.get("/")
 def index():
-    snippets = SnippetModel(db.get_connection())
-    return render_template("/snippets/index.jinja", snippets=snippets.latest())
+    account_snippets = []
+    # We now show only snippets created by the user who is currently
+    # logged in.
+    account_id = session.get("account_id")
+    if account_id is not None:
+        snippets = SnippetModel(db.get_connection())
+        account_snippets = snippets.account_snippets(account_id)
+    return render_template("/snippets/index.jinja", snippets=account_snippets)
 
 
 @blueprint.get("/create")
 def create():
+    # Users who are not logged in (i.e., whose session does not include
+    # their account id), should not be able to create a snippet.
+    if session.get("account_id") is None:
+        return redirect(url_for("accounts.login"))
+
     form = forms.SnippetCreateForm()
     return render_template("/snippets/create.jinja", form=form)
 
 
 @blueprint.post("/create")
 def create_submit():
+    account_id = session.get("account_id")
+    if account_id is None:
+        return redirect(url_for("accounts.login"))
+
     title = request.form["title"]
     content = request.form["content"]
     valid_days = int(request.form["valid_days"])
@@ -49,22 +64,8 @@ def create_submit():
         return render_template("snippets/create.jinja", form=form), 422
 
     snippets = SnippetModel(db.get_connection())
-    snippets.insert(form.title, form.content, form.valid_days)
+    snippets.insert(form.title, form.content, form.valid_days, int(account_id))
 
-    # A nice touch to improve our user experience is to display a
-    # one-time confirmation message which the user sees after they've
-    # added a new snippet. A confirmation message like this should only
-    # show up for the user once (immediately after creating the snippet)
-    # and no other users should ever see the message. This type of
-    # message is known as a "flash message" or a "toast".
-    #
-    # To make this work, we need to start sharing data (or state)
-    # between HTTP requests for the same user. The most common way to do
-    # that is to implement a *session* for the user.
-    #
-    # Flask provides the "flash" function to store a message in a user's
-    # session, and the "get_flashed_messages" function to get hold of
-    # the message in templates.
     flash("Snippet successfully created!")
 
     return redirect(url_for("home"))

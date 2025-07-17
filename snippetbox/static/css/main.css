@@ -283,6 +283,10 @@ textarea {
     border-width: 2px !important;
 }
 
+.error + label {
+    margin-top: 1rem;
+}
+
 textarea {
     padding: 18px;
     width: 100%;
@@ -337,7 +341,7 @@ p.flash {
     text-align: center;
 }
 
-p.error {
+div.error {
     color: #ffffff;
     background-color: #c0392b;
     padding: 18px;

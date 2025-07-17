@@ -3,5 +3,12 @@ CREATE TABLE IF NOT EXISTS Snippets (
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     created DATETIME NOT NULL,
-    expires DATETIME NOT NULL
+    expires DATETIME NOT NULL,
+    author_id INTEGER NOT NULL REFERENCES Accounts
+);
+
+CREATE TABLE IF NOT EXISTS Accounts (
+    id INTEGER PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
 );

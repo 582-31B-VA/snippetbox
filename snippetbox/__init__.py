@@ -1,6 +1,6 @@
 from flask import Flask
 
-from snippetbox import snippets, cli
+from snippetbox import snippets, cli, accounts
 from snippetbox.utils import db
 
 from config import Config
@@ -14,6 +14,8 @@ def create_app():
     app.cli.add_command(cli.init)
 
     app.register_blueprint(snippets.blueprint)
+    app.register_blueprint(accounts.blueprint)
+
     app.add_url_rule("/", endpoint="home", view_func=snippets.routes.index)
 
     app.teardown_appcontext(db.close_connection)

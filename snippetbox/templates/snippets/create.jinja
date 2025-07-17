@@ -1,25 +1,26 @@
 {% extends "base.jinja" %}
 {% block title %}Create a New Snippet{% endblock %}
 {% block main %}
+    <h2>Create a New Snippet</h2>
     <form action="{{ url_for('snippets.create') }}" method="POST">
         <label>
             Title:
-            {% if form.errors.get("title") %}
-                <p class="error">{{ form.errors["title"] }}</p>
+            {% if form.field_errors.get("title") %}
+                <p class="error">{{ form.field_errors["title"] }}</p>
             {% endif %}
             <input type="text" name="title" value="{{ form.title }}" required>
         </label>
         <label>
             Content:
-            {% if form.errors.get("content") %}
-                <p class="error">{{ form.errors["content"] }}</p>
+            {% if form.field_errors.get("content") %}
+                <p class="error">{{ form.field_errors["content"] }}</p>
             {% endif %}
             <textarea name="content" required>{{ form.content }}</textarea>
         </label>
         <fieldset>
             <legend>Delete in:</legend>
-            {% if form.errors.get("valid_days") %}
-                <p class="error">{{ form.errors["valid_days"] }}</p>
+            {% if form.field_errors.get("valid_days") %}
+                <p class="error">{{ form.field_errors["valid_days"] }}</p>
             {% endif %}
             <label>
                 <input

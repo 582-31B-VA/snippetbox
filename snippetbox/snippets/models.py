@@ -14,15 +14,17 @@ class Snippet:
 
 
 class SnippetModel(Model):
-    def insert(self, title: str, content: str, days_valid: int) -> int:
+    def insert(
+        self, title: str, content: str, days_valid: int, account_id: int
+    ) -> int:
         now = datetime.now()
         expires = now + timedelta(days=days_valid)
         cursor = self.db.execute(
             """
-            INSERT INTO Snippets (title, content, created, expires)
-                VALUES (?, ?, ?, ?)
+            INSERT INTO Snippets (title, content, created, expires, author_id)
+                VALUES (?, ?, ?, ?, ?)
             """,
-            (title, content, now, expires),
+            (title, content, now, expires, account_id),
         )
         self.db.commit()
 
@@ -44,6 +46,19 @@ class SnippetModel(Model):
         ).fetchone()
         return Snippet(id, title, content, created, expires)
 
+    def account_snippets(self, account_id: int) -> list[Snippet]:
+        snippets = self.db.execute(
+            """
+            SELECT Snippets.id, title, content, created, expires
+            FROM Snippets, Accounts
+            WHERE Snippets.author_id = Accounts.id
+                AND expires > CURRENT_TIMESTAMP
+                AND Accounts.id = ?
+            """,
+            (account_id,),
+        )
+        return [Snippet(*s) for s in snippets]
+
     def latest(self) -> list[Snippet]:
         rows = self.db.execute(
             """
@@ -54,5 +69,4 @@ class SnippetModel(Model):
             LIMIT 10
             """
         ).fetchall()
-        print(rows)
         return [Snippet(*row) for row in rows]

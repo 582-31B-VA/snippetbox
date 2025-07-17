@@ -1,4 +1,16 @@
 <nav>
-    <a href="{{ url_for('home') }}">Home</a>
-    <a href="{{ url_for('snippets.create') }}">Create</a>
+    <div>
+        <a href="{{ url_for('home') }}">Home</a>
+        {% if session["account_id"] %}
+            <a href="{{ url_for('snippets.create') }}">Create</a>
+        {% endif %}
+    </div>
+    <div>
+        {% if session["account_id"] %}
+            <a href="{{ url_for('accounts.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('accounts.create') }}">Register</a>
+            <a href="{{ url_for('accounts.login') }}">Login</a>
+        {% endif %}
+    </div>
 </nav>
