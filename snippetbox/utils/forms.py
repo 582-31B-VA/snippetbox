@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
 
 
-# We use this class to store and validate form data.
 @dataclass
 class Form:
     errors: dict[str, str] = field(init=False, default_factory=lambda: {})
@@ -18,7 +17,6 @@ class Form:
             self.add_error(key, msg)
 
 
-# We use this class to group field validation functions.
 class Field:
     @staticmethod
     def not_blank(value: str) -> bool:

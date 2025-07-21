@@ -1,4 +1,4 @@
-from flask import redirect, render_template, url_for, request
+from flask import redirect, render_template, url_for, request, flash
 
 from snippetbox.snippets import blueprint, forms
 from snippetbox.snippets.models import SnippetModel
@@ -20,19 +20,12 @@ def create():
 
 @blueprint.post("/create")
 def create_submit():
-    # We use "[]" and not "get" to retrieve the form date so that Flask
-    # can return an error to the client if the form doesn't have the
-    # required fields.
     title = request.form["title"]
     content = request.form["content"]
     valid_days = int(request.form["valid_days"])
 
-    # We store the values received from the client into the form object.
-    # This will allow us to validate each field (see below) and to
-    # repopulate the form if there are errors.
     form = forms.SnippetCreateForm(title, content, valid_days)
 
-    # See the Form definition in "snippetbox/utils/forms.py".
     form.check_field(
         Field.not_blank(form.title), "title", "This field cannot be blank"
     )
@@ -53,12 +46,25 @@ def create_submit():
     )
 
     if not form.is_valid:
-        # The form object contains the errors because we used
-        # "check_field" to validate the form. If there are errors, the
-        # template will be able to show them.
         return render_template("snippets/create.jinja", form=form), 422
 
     snippets = SnippetModel(db.get_connection())
     snippets.insert(form.title, form.content, form.valid_days)
+
+    # A nice touch to improve our user experience is to display a
+    # one-time confirmation message which the user sees after they've
+    # added a new snippet. A confirmation message like this should only
+    # show up for the user once (immediately after creating the snippet)
+    # and no other users should ever see the message. This type of
+    # message is known as a "flash message" or a "toast".
+    #
+    # To make this work, we need to start sharing data (or state)
+    # between HTTP requests for the same user. The most common way to do
+    # that is to implement a *session* for the user.
+    #
+    # Flask provides the "flash" function to store a message in a user's
+    # session, and the "get_flashed_messages" function to get hold of
+    # the message in templates.
+    flash("Snippet successfully created!")
 
     return redirect(url_for("home"))

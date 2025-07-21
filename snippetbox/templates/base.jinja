@@ -20,6 +20,9 @@
         </header>
         {% include 'partials/nav.jinja' %}
         <main>
+            {% for message in get_flashed_messages() %}
+                <p class="flash">{{ message }}</p>
+            {% endfor %}
             {% block main %}{% endblock %}
         </main>
         <footer>
